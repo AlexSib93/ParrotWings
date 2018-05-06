@@ -1,6 +1,7 @@
 ﻿using ParrotWings.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -8,41 +9,41 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
-namespace ParrotWings
+namespace ParrotWings.Controllers
 {
-    public class TransactionController : ApiController
+    public class PeopleController : ApiController
     {
         private PWContext db = new PWContext();
 
-        // GET api/<controller>
-        public IEnumerable<Transaction> Get()
+        // GET: api/People
+        public IQueryable<People> GetTransactions()
         {
-            return db.Transactions;
+            return db.Peoples;
         }
 
-        // GET api/<controller>/5
+        // GET: api/People/5
         [ResponseType(typeof(Transaction))]
-        public IHttpActionResult Get(Guid id)
+        public IHttpActionResult GetTransaction(Guid id)
         {
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
+            People people = db.Peoples.Find(id);
+            if (people == null)
             {
                 return NotFound();
             }
 
-            return Ok(transaction);
+            return Ok(people);
         }
 
-        // POST: api/Transaction
-        [ResponseType(typeof(Transaction))]
-        public IHttpActionResult PostTransaction(Transaction transaction)
+        // POST: api/People
+        [ResponseType(typeof(People))]
+        public IHttpActionResult PostPeople(People people)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Transactions.Add(transaction);
+            db.Peoples.Add(people);
 
             try
             {
@@ -50,7 +51,7 @@ namespace ParrotWings
             }
             catch (DbUpdateException)
             {
-                if (TransactionExists(transaction.ID))
+                if (PeopleExists(people.PeopleId))
                 {
                     return Conflict();
                 }
@@ -60,18 +61,9 @@ namespace ParrotWings
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.ID }, transaction);
+            return CreatedAtRoute("DefaultApi", new { id = people.PeopleId }, people);
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -82,9 +74,9 @@ namespace ParrotWings
             base.Dispose(disposing);
         }
 
-        private bool TransactionExists(Guid id)
+        private bool PeopleExists(Guid id)
         {
-            return db.Transactions.Count(e => e.ID == id) > 0;
+            return db.Peoples.Count(e => e.PeopleId == id) > 0;
         }
     }
 }
