@@ -8,12 +8,13 @@ namespace ParrotWings
 	{
 		public static void Configure()
 		{
-			// If you want to use server-side rendering of React components, 
-			// add all the necessary JavaScript files here. This includes 
-			// your components as well as all of their dependencies.
-			// See http://reactjs.net/ for more information. Example:
-			//ReactSiteConfiguration.Configuration
-			//	.AddScript("~/Scripts/First.jsx")
+            // If you want to use server-side rendering of React components, 
+            // add all the necessary JavaScript files here. This includes 
+            // your components as well as all of their dependencies.
+            // See http://reactjs.net/ for more information. Example:
+            ReactSiteConfiguration.Configuration = new ReactSiteConfiguration()
+                .AddScript("~/Scripts/app/app.jsx")
+                .AddScript("~/Scripts/app/HelloWorld.jsx"); 
 			//	.AddScript("~/Scripts/Second.jsx");
 			
 			// If you use an external build too (for example, Babel, Webpack,

@@ -60,7 +60,7 @@ namespace ParrotWings
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = transaction.ID }, transaction);
+            return Ok();
         }
 
         // PUT api/<controller>/5
