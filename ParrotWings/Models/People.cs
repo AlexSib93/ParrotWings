@@ -7,10 +7,7 @@ namespace ParrotWings.Models
 {
     public class People 
     {
-        public People()
-        {
-            PeopleId = Guid.NewGuid();
-        }
+        public ApplicationUser AppUser { get; set; }
 
         public Guid PeopleId { get; set; }
 

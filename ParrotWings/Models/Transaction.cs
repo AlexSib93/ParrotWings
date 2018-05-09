@@ -9,9 +9,9 @@ namespace ParrotWings.Models
     {
         public Guid ID { get; set; }
 
-        public People Poeple { get; set; }
+        public ApplicationUser Poeple { get; set; }
 
-        public People Recepient { get; set; }
+        public ApplicationUser Recepient { get; set; }
 
         public string Number { get; set; }
 

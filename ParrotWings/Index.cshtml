@@ -111,6 +111,11 @@
                 $('#logOut').click(function (e) {
                     e.preventDefault();
                     sessionStorage.removeItem(tokenKey);
+
+                    $('.userInfo').css('display', 'none');
+                    $('.loginForm').css('display', 'block');
+                    $('#emailLogin').val('');
+                    $('#passwordLogin').val('');
                 });
             });
 

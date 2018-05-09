@@ -25,42 +25,42 @@ namespace ParrotWings.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        [Authorize]
-        public People Post()//[FromBody]string value)
-        {
-            People p1 = new People()
-            {
-                Name = "Alex",
-                LastName = "Sibiryakov",
-                Email = "alexsib93@gmail.com",
-                Login = "AlexSib"
-            };
+        //[HttpPost]
+        //[Authorize]
+        //public People Post()//[FromBody]string value)
+        //{
+        //    People p1 = new People()
+        //    {
+        //        Name = "Alex",
+        //        LastName = "Sibiryakov",
+        //        Email = "alexsib93@gmail.com",
+        //        Login = "AlexSib"
+        //    };
 
-            People p2 = new People()
-            {
-                Name = "Sergey",
-                LastName = "Semyonov",
-                Email = "sem.ser@yandex.ru",
-                Login = "sem.ser"
-            };
+        //    People p2 = new People()
+        //    {
+        //        Name = "Sergey",
+        //        LastName = "Semyonov",
+        //        Email = "sem.ser@yandex.ru",
+        //        Login = "sem.ser"
+        //    };
 
-            People p3 = new People()
-            {
-                Name = "Petr",
-                LastName = "Ivanov",
-                Email = "ivanov.p85@gmail.com",
-                Login = "ivanov.p"
-            };
+        //    People p3 = new People()
+        //    {
+        //        Name = "Petr",
+        //        LastName = "Ivanov",
+        //        Email = "ivanov.p85@gmail.com",
+        //        Login = "ivanov.p"
+        //    };
 
-            db.Peoples.Add(p1);
-            db.Peoples.Add(p2);
-            db.Peoples.Add(p3);
+        //    db.Peoples.Add(p1);
+        //    db.Peoples.Add(p2);
+        //    db.Peoples.Add(p3);
 
-            db.SaveChanges();
+        //    db.SaveChanges();
 
-            return p1;
-        }
+        //    return p1;
+        //}
 
         // PUT api/values/5
         public void Put(int id, [FromBody]string value)

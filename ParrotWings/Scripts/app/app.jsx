@@ -348,6 +348,49 @@ class Success extends React.Component {
     }
 }
 
+//class LoginBox extends React.Component {
+//    constructor() {
+//        super()
+//        this.state = {
+//            showUserInfo: false,
+//            showLoginForms: true
+//        }
+//    }
+//    render() {
+//        return (
+//            <div>
+//                <div className="userInfo" style={{ display: this.state.showUserInfo ? "block" :"none" }}>
+//                    <p>Вы вошли как: <span className="userName"></span></p>
+//                    <input type="button" value="Выйти" id="logOut" onClick={this.collapseUserInfo.bind(this)} />
+//                </div>
+//                <div className="loginForm" style={{ display: this.state.showLoginForms ? "block" : "none" }}>
+//                    <h3>Вход на сайт</h3>
+//                    <label>Введите email</label><br />
+//                    <input type="email" id="emailLogin" /> <br /><br />
+//                    <label>Введите пароль</label><br />
+//                    <input type="password" id="passwordLogin" /><br /><br />
+//                    <input type="submit" id="submitLogin" value="Логин" />
+//                </div>
+//            </div>
+//        );
+//    }
+//    collapseUserInfo = () => {
+
+//        console.log("setState NOW!!!!", this.state);
+//        this.setState({
+//            showUserInfo: false,
+//            showLoginForms: true
+//        })
+
+
+//        console.log("setState Good!!!!", this.state);
+//    }
+//}
+
+ReactDOM.render(
+    <LoginBox />,
+    document.getElementById("LoginBox")
+);
 
 ReactDOM.render(
     <TransactionCreator />,

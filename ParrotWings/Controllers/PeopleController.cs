@@ -16,8 +16,7 @@ namespace ParrotWings.Controllers
         private PWContext db = new PWContext();
 
         // GET: api/People
-        [Authorize]
-        public IQueryable<People> GetTPeoples()
+        public IQueryable<ApplicationUser> GetTPeoples()
         {
             return db.Peoples;
         }
@@ -26,7 +25,7 @@ namespace ParrotWings.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetPeople(Guid id)
         {
-            People people = db.Peoples.Find(id);
+            ApplicationUser people = db.Peoples.Find(id);
             if (people == null)
             {
                 return NotFound();
@@ -35,35 +34,35 @@ namespace ParrotWings.Controllers
             return Ok(people);
         }
 
-        // POST: api/People
-        [ResponseType(typeof(People))]
-        public IHttpActionResult PostPeople(People people)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/People
+        //[ResponseType(typeof(People))]
+        //public IHttpActionResult PostPeople(People people)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Peoples.Add(people);
+        //    db.Peoples.Add(people);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (PeopleExists(people.PeopleId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (PeopleExists(people.PeopleId))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return CreatedAtRoute("DefaultApi", new { id = people.PeopleId }, people);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = people.PeopleId }, people);
+        //}
 
 
         protected override void Dispose(bool disposing)
@@ -75,9 +74,9 @@ namespace ParrotWings.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PeopleExists(Guid id)
-        {
-            return db.Peoples.Count(e => e.PeopleId == id) > 0;
-        }
+        //private bool PeopleExists(Guid id)
+        //{
+        //    return db.Peoples.Count(e => e.PeopleId == id) > 0;
+        //}
     }
 }
