@@ -11,6 +11,17 @@
     <title></title>
 </head>
 <body>
+    <div>
+        <label>Введите email</label><br />
+        <input type="email" id="email" /> <br /><br />
+        <label>Введите пароль</label><br />
+        <input type="password" id="password" /><br /><br />
+        <label>Подтвердите пароль</label><br />
+        <input type="password" id="confirmpassword" /><br /><br />
+        <input type="submit" id="submit" value="Регистрация" />
+    </div>
+        
+
     <div id="create-transaction"></div>
     <div>
     <p1>HELLO WORLD!!!</p1>
@@ -28,6 +39,34 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="~/Scripts/app/app.jsx"></script>
+    <script type="text/javascript">
+    $(function () {
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            var data = {
+                Email: $('#email').val(),
+                Password: $('#password').val(),
+                ConfirmPassword: $('#confirmpassword').val()
+            };
+
+            console.log("asdfasd", data);
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/Account/Register',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (data) {
+                    alert("Регистрация пройдена" + data)
+                },
+                fail: function (data) {
+                    alert("В процесе регистрации возникла ошибка" + data)
+                }
+            });
+        });
+    })
+    </script>
+
         
 </body>
 </html>
