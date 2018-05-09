@@ -16,14 +16,15 @@ namespace ParrotWings.Controllers
         private PWContext db = new PWContext();
 
         // GET: api/People
-        public IQueryable<People> GetTransactions()
+        [Authorize]
+        public IQueryable<People> GetTPeoples()
         {
             return db.Peoples;
         }
 
         // GET: api/People/5
         [ResponseType(typeof(Transaction))]
-        public IHttpActionResult GetTransaction(Guid id)
+        public IHttpActionResult GetPeople(Guid id)
         {
             People people = db.Peoples.Find(id);
             if (people == null)

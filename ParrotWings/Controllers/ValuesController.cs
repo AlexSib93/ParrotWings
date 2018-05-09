@@ -26,6 +26,7 @@ namespace ParrotWings.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize]
         public People Post()//[FromBody]string value)
         {
             People p1 = new People()

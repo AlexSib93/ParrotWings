@@ -11,6 +11,18 @@
     <title></title>
 </head>
 <body>
+    <div class="userInfo" style="display:none;">
+        <p>Вы вошли как: <span class="userName"></span></p>
+        <input type="button" value="Выйти" id="logOut" />
+    </div>
+    <div class="loginForm">
+        <h3>Вход на сайт</h3>
+        <label>Введите email</label><br />
+        <input type="email" id="emailLogin" /> <br /><br />
+        <label>Введите пароль</label><br />
+        <input type="password" id="passwordLogin" /><br /><br />
+        <input type="submit" id="submitLogin" value="Логин" />
+    </div>
     <div>
         <label>Введите email</label><br />
         <input type="email" id="email" /> <br /><br />
@@ -21,6 +33,7 @@
         <input type="submit" id="submit" value="Регистрация" />
     </div>
         
+    <input type="submit" id="getpeople" value="GetPeople" />
 
     <div id="create-transaction"></div>
     <div>
@@ -39,32 +52,86 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="~/Scripts/app/app.jsx"></script>
-    <script type="text/javascript">
-    $(function () {
-        $('#submit').click(function (e) {
-            e.preventDefault();
-            var data = {
-                Email: $('#email').val(),
-                Password: $('#password').val(),
-                ConfirmPassword: $('#confirmpassword').val()
-            };
+        <script type="text/javascript">
+            $(function () {
+                $('#submit').click(function (e) {
+                    e.preventDefault();
+                    var data = {
+                        Email: $('#email').val(),
+                        Password: $('#password').val(),
+                        ConfirmPassword: $('#confirmpassword').val()
+                    };
 
-            console.log("asdfasd", data);
+                    console.log("asdfasd", data);
 
-            $.ajax({
-                type: 'POST',
-                url: '/api/Account/Register',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(data),
-                success: function (data) {
-                    alert("Регистрация пройдена" + data)
-                },
-                fail: function (data) {
-                    alert("В процесе регистрации возникла ошибка" + data)
-                }
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Account/Register',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        success: function (data) {
+                            alert("Регистрация пройдена" + data)
+                        },
+                        fail: function (data) {
+                            alert("В процесе регистрации возникла ошибка" + data)
+                        }
+                    });
+                });
             });
-        });
-    })
+            $(function () {
+                //...........................
+
+                var tokenKey = "tokenInfo";
+                $('#submitLogin').click(function (e) {
+                    e.preventDefault();
+                    var loginData = {
+                        grant_type: 'password',
+                        username: $('#emailLogin').val(),
+                        password: $('#passwordLogin').val()
+                    };
+
+                    console.log("log", loginData);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Token',
+                        data: loginData
+                    }).success(function (data) {
+                        $('.userName').text(data.userName);
+                        $('.userInfo').css('display', 'block');
+                        $('.loginForm').css('display', 'none');
+                        // сохраняем в хранилище sessionStorage токен доступа
+                        sessionStorage.setItem(tokenKey, data.access_token);
+                        console.log(data.access_token);
+                    }).fail(function (data) {
+                        alert('При логине возникла ошибка');
+                    });
+                });
+
+                $('#logOut').click(function (e) {
+                    e.preventDefault();
+                    sessionStorage.removeItem(tokenKey);
+                });
+            });
+
+            $('#getpeople').click(function (e) {
+                var tokenKey = "tokenInfo";
+                $.ajax({
+                    type: 'Get',
+                    url: '/api/people',
+                    beforeSend: function (xhr) {
+                        var token = sessionStorage.getItem(tokenKey);
+                        xhr.setRequestHeader("Authorization", "Bearer " + token);
+                    },
+                }).success(function (data) {
+
+                    alert('При Get people all good');
+                    console.log('Get people good!');
+                }).fail(function (data) {
+                    alert('При Get people возникла ошибка');
+                    console.log('Get people bad!');
+                });
+            });
     </script>
 
         

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ParrotWings.Models
 {
-    public class People
+    public class People 
     {
         public People()
         {

@@ -340,38 +340,38 @@ namespace ParrotWings.Controllers
             return Ok();
         }
 
-        // POST api/Account/RegisterExternal
-        [OverrideAuthentication]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("RegisterExternal")]
-        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST api/Account/RegisterExternal
+        //[OverrideAuthentication]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        //[Route("RegisterExternal")]
+        //public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var info = await Authentication.GetExternalLoginInfoAsync();
-            if (info == null)
-            {
-                return InternalServerError();
-            }
+        //    var info = await Authentication.GetExternalLoginInfoAsync();
+        //    if (info == null)
+        //    {
+        //        return InternalServerError();
+        //    }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+        //    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
-            IdentityResult result = await UserManager.CreateAsync(user);
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
+        //    IdentityResult result = await UserManager.CreateAsync(user);
+        //    if (!result.Succeeded)
+        //    {
+        //        return GetErrorResult(result);
+        //    }
 
-            result = await UserManager.AddLoginAsync(user.Id, info.Login);
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-            return Ok();
-        }
+        //    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+        //    if (!result.Succeeded)
+        //    {
+        //        return GetErrorResult(result);
+        //    }
+        //    return Ok();
+        //}
 
         protected override void Dispose(bool disposing)
         {
