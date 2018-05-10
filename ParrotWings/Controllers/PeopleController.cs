@@ -16,9 +16,21 @@ namespace ParrotWings.Controllers
         private PWContext db = new PWContext();
 
         // GET: api/People
-        public IQueryable<People> GetTPeoples()
+        public List<PeopleBindingModel> GetTPeoples()
         {
-            return db.Peoples;
+            List<PeopleBindingModel> peopleBM = new List<PeopleBindingModel>();
+
+            var pp = db.Peoples.Where(p => p.ID.ToString() != "9988BF03-1F29-48EA-9599-090A8217EFBE");
+
+            foreach (People p in pp)
+            {
+                peopleBM.Add(new PeopleBindingModel(){
+                    id = p.ID,
+                    value = p.Name
+                });
+            }
+
+            return peopleBM;
         }
 
         // GET: api/People/5

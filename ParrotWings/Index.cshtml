@@ -35,7 +35,7 @@
        
     <div id="createTransaction"></div>  
         <h1> New transaction </h1><br />
-        <label>Choose the recipient</label><br />
+        <label>Choose the recipient</label><br /><div id="txtPeopleID"></div>
         <input type="text" id="recepient" /><br /><br />
         <label>Amount of transaction</label><br />
         <input type="number" id="amount" /><br />        
@@ -88,7 +88,7 @@
                 $('#confirmTransaction').click(function (e) {
                     e.preventDefault();
                     var data = {
-                        RecepientID: $('#recepient').val(),
+                        RecepientID: $('#txtPeopleID').val(),
                         Amount: $('#amount').val()
                     };
 
@@ -167,6 +167,19 @@
                     console.log('Get people bad!');
                 });
             });
+            
+
+            $("#recepient").autocomplete({
+                source: "/api/people",
+                search: function (event) {
+                    $("#txtPeopleID").val('');
+                },
+                select: function (event, ui) {
+                    $("#txtPeopleID").val(ui.item.id);
+                }
+            }); 
+            
+
     </script>
 
         

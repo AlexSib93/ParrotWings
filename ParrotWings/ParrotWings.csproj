@@ -282,6 +282,7 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\People.cs" />
+    <Compile Include="Models\PeopleBindingModel.cs" />
     <Compile Include="Models\PWContext.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionBindingModel.cs" />
