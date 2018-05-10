@@ -17,9 +17,21 @@ namespace ParrotWings
         private PWContext db = new PWContext();
 
         // GET api/<controller>
-        public IEnumerable<Transaction> Get()
+        public IEnumerable<ShowTransactionBindingModel> Get()
         {
-            return db.Transactions;
+            var user = db.Peoples.Find(new Guid("9988BF03-1F29-48EA-9599-090A8217EFBE"));
+
+
+            return db.Transactions
+                .Where(x => x.People == user || x.Recepient == user)
+                    .Select(t => new ShowTransactionBindingModel
+                    {
+                        ID = t.ID,
+                        RecepientName = t.Recepient.Name,
+                        PeopleName = t.People.Name,
+                        DateTime = t.DateTime,
+                        Amount = t.Amount
+                    });
         }
 
         // GET api/<controller>/5
@@ -96,10 +108,10 @@ namespace ParrotWings
             return db.Transactions.Count(e => e.ID == id) > 0;
         }
 
-        public People GetCurrentPeople()
-        {
-            return db.Peoples.Find(User.Identity.GetUserId());
-        }
+        //public People CurrentPeople()
+        //{
+        //    return db.Peoples.Find(User.Identity.GetUserId());
+        //}
 
         #endregion Helpers
     }

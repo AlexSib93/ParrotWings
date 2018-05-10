@@ -11,4 +11,19 @@ namespace ParrotWings.Models
 
         public decimal Amount { get; set; }
     }
+
+    public class ShowTransactionBindingModel
+    {
+        public Guid ID { get; set; }
+        
+        public string PeopleName { get; set; }
+
+        public string RecepientName { get; set; }
+
+        public decimal Amount { get; set; }
+
+        public DateTime DateTime { get; set; }
+
+        public decimal ResultBalance { get; set; }
+    }
 }
