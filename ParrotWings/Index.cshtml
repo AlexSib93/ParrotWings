@@ -32,8 +32,15 @@
         <input type="password" id="confirmpassword" /><br /><br />
         <input type="submit" id="submit" value="Регистрация" />
     </div>
-        
-    <input type="submit" id="getpeople" value="GetPeople" />
+       
+    <div id="createTransaction"></div>  
+        <h1> New transaction </h1><br />
+        <label>Choose the recipient</label><br />
+        <input type="text" id="recepient" /><br /><br />
+        <label>Amount of transaction</label><br />
+        <input type="number" id="amount" /><br />        
+        <input type="submit" id="confirmTransaction" value="Create" />
+    <br /><br />
 
     <div id="create-transaction"></div>
     <div>
@@ -74,6 +81,29 @@
                         },
                         fail: function (data) {
                             alert("В процесе регистрации возникла ошибка" + data)
+                        }
+                    });
+                });
+
+                $('#confirmTransaction').click(function (e) {
+                    e.preventDefault();
+                    var data = {
+                        RecepientID: $('#recepient').val(),
+                        Amount: $('#amount').val()
+                    };
+
+                    console.log("new transaction", data);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Transaction',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        success: function (data) {
+                            alert("Transaction successfully created!")
+                        },
+                        fail: function (data) {
+                            alert("Creating a transaction failed" + data)
                         }
                     });
                 });

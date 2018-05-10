@@ -22,6 +22,9 @@ namespace ParrotWings.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
+
+        private PWContext db = new PWContext();
+
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
@@ -331,6 +334,10 @@ namespace ParrotWings.Controllers
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+            People people = new People(user.Id, user.UserName);
+            db.Peoples.Add(people);
+            db.SaveChanges();
 
             if (!result.Succeeded)
             {

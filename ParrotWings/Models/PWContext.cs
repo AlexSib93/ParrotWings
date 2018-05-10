@@ -10,6 +10,6 @@ namespace ParrotWings.Models
     {
         public DbSet<Transaction> Transactions { get; set; }
 
-        public DbSet<ApplicationUser> Peoples { get; set; }
+        public DbSet<People> Peoples { get; set; }
     }
 }

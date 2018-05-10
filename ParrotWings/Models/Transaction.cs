@@ -5,19 +5,17 @@ using System.Web;
 
 namespace ParrotWings.Models
 {
-    public class Transaction
+    public class Transaction : BaseModel
     {
-        public Guid ID { get; set; }
+        public virtual People People { get; set; }
 
-        public ApplicationUser Poeple { get; set; }
-
-        public ApplicationUser Recepient { get; set; }
+        public virtual People Recepient { get; set; }
 
         public string Number { get; set; }
 
-        public string Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public DateTime DateTime { get; set; }
 
-    }
+    }    
 }

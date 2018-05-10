@@ -16,7 +16,7 @@ namespace ParrotWings.Controllers
         private PWContext db = new PWContext();
 
         // GET: api/People
-        public IQueryable<ApplicationUser> GetTPeoples()
+        public IQueryable<People> GetTPeoples()
         {
             return db.Peoples;
         }
@@ -25,7 +25,7 @@ namespace ParrotWings.Controllers
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult GetPeople(Guid id)
         {
-            ApplicationUser people = db.Peoples.Find(id);
+            People people = db.Peoples.Find(id);
             if (people == null)
             {
                 return NotFound();

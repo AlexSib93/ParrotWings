@@ -5,9 +5,8 @@ using System.Web;
 
 namespace ParrotWings.Models
 {
-    public class Country
+    public class Country : BaseModel
     {
-        public Guid CountyId { get; set; }
 
         public string Name { get; set; }
 

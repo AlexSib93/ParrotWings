@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace ParrotWings.Models
 {
-    public class People 
+    public class People : BaseModel
     {
-        public ApplicationUser AppUser { get; set; }
+        public override Guid ID { get; set;}
 
-        public Guid PeopleId { get; set; }
+        public Guid IdentityId { get; set; }
 
         public string Name { get; set; }
 
@@ -22,5 +24,19 @@ namespace ParrotWings.Models
         public string Login { get; set; }
 
         public DateTime? Birthday { get; set; }
+        
+        //public ICollection<Transaction> Transactions { get; set; }
+
+        public People () : base()
+        {
+
+        }
+
+        public People(string identityId, string userName) : base()
+        {
+            this.IdentityId = new Guid(identityId);
+            this.Name = userName;
+        }
+
     }
 }

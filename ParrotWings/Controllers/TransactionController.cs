@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 
 namespace ParrotWings
 {
@@ -35,29 +37,34 @@ namespace ParrotWings
 
         // POST: api/Transaction
         [ResponseType(typeof(Transaction))]
-        public IHttpActionResult PostTransaction(Transaction transaction)
+        public IHttpActionResult PostTransaction(CreateTransactionBindingModel transaction)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Transactions.Add(transaction);
+            var people = db.Peoples.Find(new Guid("9988BF03-1F29-48EA-9599-090A8217EFBE"));
+
+            Transaction newTransaction = new Transaction() {
+                Recepient = db.Peoples.Find(transaction.RecepientID),
+                People = people,
+                Amount = transaction.Amount,
+                DateTime = DateTime.Now
+            };
+
+            db.Entry(newTransaction.Recepient).State = EntityState.Unchanged;
+            db.Entry(newTransaction.People).State = EntityState.Unchanged;
+
+            db.Transactions.Add(newTransaction);
 
             try
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
-                if (TransactionExists(transaction.ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                    return InternalServerError();
             }
 
             return Ok();
@@ -73,6 +80,8 @@ namespace ParrotWings
         {
         }
 
+        #region Helpers
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -86,5 +95,12 @@ namespace ParrotWings
         {
             return db.Transactions.Count(e => e.ID == id) > 0;
         }
+
+        public People GetCurrentPeople()
+        {
+            return db.Peoples.Find(User.Identity.GetUserId());
+        }
+
+        #endregion Helpers
     }
 }
