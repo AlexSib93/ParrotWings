@@ -196,7 +196,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Components\TransactionList.jsx" />
+    <Content Include="Scripts\components\LoginControl.jsx" />
+    <Content Include="Scripts\components\TransactionList.jsx" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -277,8 +278,13 @@
     <Compile Include="Migrations\201805101832020_DataMigration2.Designer.cs">
       <DependentUpon>201805101832020_DataMigration2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805131415118_AddBalanceHistory.cs" />
+    <Compile Include="Migrations\201805131415118_AddBalanceHistory.Designer.cs">
+      <DependentUpon>201805131415118_AddBalanceHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\BalanceHistory.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -310,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805101832020_DataMigration2.resx">
       <DependentUpon>201805101832020_DataMigration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805131415118_AddBalanceHistory.resx">
+      <DependentUpon>201805131415118_AddBalanceHistory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
