@@ -36,55 +36,55 @@ ReactDOM.render(
 //    }
 //}
 
-class InputAutocomplete extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            SelectedId: null,
-            availableTags: [
-                { value: "Испанский", id: "6E49B2B05445" },
-                { value: "Итальянский", id: "6E49B2B05445" },
-                { value: "Английский", id: "6E49B2B05445" },
-                { value: "Китайский", id: "6E49B2B05445" },
-                { value: "Русский", id: "6E49B2B05445" }]
-        }
-        console.log("good", this.state.availableTags);
-    }
-    render() {
-        return (
-            <div>
-                <div id="txtAllowSearchID"></div>
-                <label>Choose People</label>
-                <input id="autocompl" type="text" />
-                <button id="showbutton">Show compl</button>
-            </div>
-        );
-    }
-    componentDidMount() {
-        console.log("may be good?");
-        $("#autocompl").autocomplete({
-            source: availableTags
-        });
-        //    search: function (event) {
-        //        ////$("#txtAllowSearchID").val('');
-        //        //this.setState(
-        //        //    { SelectedId: null }
-        //        //);
-        //    },
-        //    select: function (event, ui) {
-        //        //// $("#txtAllowSearchID").val(ui.item.id);
-        //        //this.setState(
-        //        //    { SelectedId: ui.item.id }
-        //        //);
-        //    }
-        //});
-        //$('#showbutton').click(function () {
-        //    alert($("#txtAllowSearchID").val()) // get the id from the hidden input
-        //});
-        console.log("yes, all good!");
-    }   
+//class InputAutocomplete extends React.Component {
+//    constructor(props) {
+//        super(props)
+//        this.state = {
+//            SelectedId: null,
+//            availableTags: [
+//                { value: "Испанский", id: "6E49B2B05445" },
+//                { value: "Итальянский", id: "6E49B2B05445" },
+//                { value: "Английский", id: "6E49B2B05445" },
+//                { value: "Китайский", id: "6E49B2B05445" },
+//                { value: "Русский", id: "6E49B2B05445" }]
+//        }
+//        console.log("good", this.state.availableTags);
+//    }
+//    render() {
+//        return (
+//            <div>
+//                <div id="txtAllowSearchID"></div>
+//                <label>Choose People</label>
+//                <input id="autocompl" type="text" />
+//                <button id="showbutton">Show compl</button>
+//            </div>
+//        );
+//    }
+//    componentDidMount() {
+//        console.log("may be good?");
+//        $("#autocompl").autocomplete({
+//            source: availableTags
+//        });
+//        //    search: function (event) {
+//        //        ////$("#txtAllowSearchID").val('');
+//        //        //this.setState(
+//        //        //    { SelectedId: null }
+//        //        //);
+//        //    },
+//        //    select: function (event, ui) {
+//        //        //// $("#txtAllowSearchID").val(ui.item.id);
+//        //        //this.setState(
+//        //        //    { SelectedId: ui.item.id }
+//        //        //);
+//        //    }
+//        //});
+//        //$('#showbutton').click(function () {
+//        //    alert($("#txtAllowSearchID").val()) // get the id from the hidden input
+//        //});
+//        console.log("yes, all good!");
+//    }   
 
-}
+//}
 
 class TransactionCreator extends React.Component {
     constructor(props) {
@@ -396,3 +396,4 @@ ReactDOM.render(
     <TransactionCreator />,
     document.getElementById("create-transaction")
 );
+

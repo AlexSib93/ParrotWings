@@ -52,6 +52,7 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="~/Scripts/app/app.jsx"></script>
+    <script src="~/Scripts/Components/TransactionList.jsx"></script>
         <script type="text/javascript">
             $(function () {
                 $('#submit').click(function (e) {
@@ -159,11 +160,25 @@
                     alert('При Get people возникла ошибка');
                     console.log('Get people bad!');
                 });
-            });
-            
+            });            
 
             $("#recepient").autocomplete({
-                source: "/api/people",
+                source:
+                    function (request, response) {
+
+                        $.getJSON(
+                            '',
+                            { filter: $('input#recepient').val() },
+                            function (data) {
+
+                            var suggestions = []; // массив для хранения результатов
+                            $.each(data, function (key, val) {
+                                suggestions.push(val.value); // добавляем все элементы
+                            });
+
+                            response(suggestions);
+                        });
+                    },
                 search: function (event) {
                     $("#txtPeopleID").val('');
                 },

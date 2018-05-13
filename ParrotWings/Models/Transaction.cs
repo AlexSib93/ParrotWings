@@ -7,9 +7,9 @@ namespace ParrotWings.Models
 {
     public class Transaction : BaseModel
     {
-        public virtual People People { get; set; }
+        public People People { get; set; }
 
-        public virtual People Recepient { get; set; }
+        public People Recepient { get; set; }
 
         public string Number { get; set; }
 

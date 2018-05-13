@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace ParrotWings
 {
@@ -23,7 +24,7 @@ namespace ParrotWings
 
 
             return db.Transactions
-                .Where(x => x.People == user || x.Recepient == user)
+                .Where(x => x.People.ID.Equals(user.ID) || x.Recepient.ID.Equals(user.ID))
                     .Select(t => new ShowTransactionBindingModel
                     {
                         ID = t.ID,
