@@ -15,7 +15,7 @@
             <div>
                 <h3> HelloLoginControl</h3>
                 {this.state.isAutorized
-                    ? <AutorizedForm peopleName={this.state.peopleName} updateState={this.getState.bind(this)} />
+                    ? <AutorizedForm peopleName={this.state.peopleName} balance={this.state.balance} updateState={this.getState.bind(this)} />
                     : <NotAutorizedForm updateState={this.getState.bind(this)}/>}
                 <button onClick={this.getState.bind(this)}>GetState</button>
             </div>
@@ -39,7 +39,8 @@
     login(data) {
         this.setState({
             isAutorized: true,
-            peopleName: data.PeopleName 
+            peopleName: data.PeopleName,
+            balance: data.Balance
         });
     }
     getStateResult(xhr, status) {
@@ -63,7 +64,7 @@ class AutorizedForm extends React.Component {
     render() {
         return (
             <div>
-                <h4>Hello, {this.props.peopleName}!</h4>
+                <h4>Hello, {this.props.peopleName}! balance: --{this.props.balance} PW--</h4>
                 <button onClick={this.logout.bind(this)}>Logout</button>
             </div>
         );

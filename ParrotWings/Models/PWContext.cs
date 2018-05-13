@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace ParrotWings.Models
 {
@@ -13,5 +9,7 @@ namespace ParrotWings.Models
         public DbSet<People> Peoples { get; set; }
 
         public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Balance> Balances { get; set; }
     }
 }

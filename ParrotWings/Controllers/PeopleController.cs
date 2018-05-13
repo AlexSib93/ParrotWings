@@ -49,7 +49,7 @@ namespace ParrotWings.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 People user = CurrentPeople();
-                return Ok( new PeopleStateBindingModel() { PeopleName = user.Name });
+                return Ok( new PeopleStateBindingModel() { PeopleName = user.Name, Balance = user.Balance });
             }
             else
             {

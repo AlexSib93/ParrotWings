@@ -36,5 +36,18 @@ namespace ParrotWings.Models
             this.Name = userName;
         }
 
+        [NotMapped]
+        public decimal Balance
+        {
+            get
+            {
+                using (PWContext db = new PWContext())
+                {
+                    return db.Balances.OrderByDescending(x => x.DtCreaate).FirstOrDefault().Value;
+                }
+            }
+            private set { }
+        }
+
     }
 }

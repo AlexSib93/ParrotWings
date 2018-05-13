@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ParrotWings.Models
+﻿namespace ParrotWings.Models
 {
     public enum TransactionType
     {

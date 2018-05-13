@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ParrotWings.Models
+﻿namespace ParrotWings.Models
 {
     public class Balance : BaseModel
     {
@@ -14,5 +9,15 @@ namespace ParrotWings.Models
         public string Comment { get; set; }
 
         public Transaction Transaction { get; set; }
+
+        public Balance() : base() {
+        }
+
+        public Balance(People people, decimal value, string comment)
+        {
+            Value = value;
+            Comment = comment;
+            People = people;
+        }
     }
 }
