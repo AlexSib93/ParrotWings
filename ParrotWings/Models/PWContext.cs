@@ -11,5 +11,7 @@ namespace ParrotWings.Models
         public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<People> Peoples { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
     }
 }

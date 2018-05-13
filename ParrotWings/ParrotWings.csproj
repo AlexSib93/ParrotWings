@@ -284,7 +284,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\BalanceHistory.cs" />
+    <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -293,6 +293,8 @@
     <Compile Include="Models\PWContext.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionBindingModel.cs" />
+    <Compile Include="Models\TransactionState.cs" />
+    <Compile Include="Models\TransactionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="App_Data\WebApiConfig.cs" />

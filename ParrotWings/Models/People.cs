@@ -21,12 +21,10 @@ namespace ParrotWings.Models
 
         public string Email { get; set; }
 
-        public string Login { get; set; }
+        public Country Country { get; set; }
 
         public DateTime? Birthday { get; set; }
         
-        //public ICollection<Transaction> Transactions { get; set; }
-
         public People () : base()
         {
 

@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ParrotWings.Models
 {
-    public class Country : BaseModel
+    public enum TransactionType
     {
-        public string Name { get; set; }
-
-    }
+        Debet = 0,
+        Credit = 1
+    };
 }

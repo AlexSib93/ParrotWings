@@ -24,11 +24,11 @@ namespace ParrotWings
             People user = CurrentPeople();
 
             return db.Transactions
-                .Where(x => x.People.ID.Equals(user.ID) || x.Recepient.ID.Equals(user.ID))
+                .Where(x => x.People.ID.Equals(user.ID) || x.Correspondent.ID.Equals(user.ID))
                     .Select(t => new ShowTransactionBindingModel
                     {
                         ID = t.ID,
-                        RecepientName = t.Recepient.Name,
+                        RecepientName = t.Correspondent.Name,
                         PeopleName = t.People.Name,
                         DateTime = t.DateTime,
                         Amount = t.Amount
@@ -61,13 +61,13 @@ namespace ParrotWings
             People people = CurrentPeople();
 
             Transaction newTransaction = new Transaction() {
-                Recepient = db.Peoples.Find(transaction.RecepientID),
+                Correspondent = db.Peoples.Find(transaction.RecepientID),
                 People = people,
                 Amount = transaction.Amount,
                 DateTime = DateTime.Now
             };
 
-            db.Entry(newTransaction.Recepient).State = EntityState.Unchanged;
+            db.Entry(newTransaction.Correspondent).State = EntityState.Unchanged;
             db.Entry(newTransaction.People).State = EntityState.Unchanged;
 
             db.Transactions.Add(newTransaction);

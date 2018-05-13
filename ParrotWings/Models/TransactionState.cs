@@ -5,9 +5,10 @@ using System.Web;
 
 namespace ParrotWings.Models
 {
-    public class Country : BaseModel
+    public class TransactionState : BaseModel
     {
         public string Name { get; set; }
 
+        public string Comment { get; set; }
     }
 }
