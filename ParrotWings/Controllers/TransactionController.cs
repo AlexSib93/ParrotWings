@@ -18,10 +18,10 @@ namespace ParrotWings
         private PWContext db = new PWContext();
 
         // GET api/<controller>
+        [Authorize]
         public IEnumerable<ShowTransactionBindingModel> Get()
         {
-            var user = db.Peoples.Find(new Guid("9988BF03-1F29-48EA-9599-090A8217EFBE"));
-
+            People user = CurrentPeople();
 
             return db.Transactions
                 .Where(x => x.People.ID.Equals(user.ID) || x.Recepient.ID.Equals(user.ID))
@@ -49,6 +49,7 @@ namespace ParrotWings
         }
 
         // POST: api/Transaction
+        [Authorize]
         [ResponseType(typeof(Transaction))]
         public IHttpActionResult PostTransaction(CreateTransactionBindingModel transaction)
         {
@@ -57,7 +58,7 @@ namespace ParrotWings
                 return BadRequest(ModelState);
             }
 
-            var people = db.Peoples.Find(new Guid("9988BF03-1F29-48EA-9599-090A8217EFBE"));
+            People people = CurrentPeople();
 
             Transaction newTransaction = new Transaction() {
                 Recepient = db.Peoples.Find(transaction.RecepientID),
@@ -109,10 +110,13 @@ namespace ParrotWings
             return db.Transactions.Count(e => e.ID == id) > 0;
         }
 
-        //public People CurrentPeople()
-        //{
-        //    return db.Peoples.Find(User.Identity.GetUserId());
-        //}
+        public People CurrentPeople()
+        {
+            Guid ID = new Guid(User.Identity.GetUserId());
+
+            return db.Peoples
+                .FirstOrDefault(x => x.IdentityId.Equals(ID));
+        }
 
         #endregion Helpers
     }

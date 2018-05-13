@@ -1,4 +1,5 @@
-﻿using ParrotWings.Models;
+﻿using Microsoft.AspNet.Identity;
+using ParrotWings.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,12 +18,15 @@ namespace ParrotWings.Controllers
 
         // GET: api/People
         [Route("api/filteredPeoples")]
+        [Authorize]
         public List<PeopleBindingModel> GetTPeoples(string filter)
         {
+            People user = CurrentPeople();
+
             List<PeopleBindingModel> peopleBM = new List<PeopleBindingModel>();
 
             var pp = db.Peoples.Where(p =>
-                p.ID.ToString() != "9988BF03-1F29-48EA-9599-090A8217EFBE"
+                !p.ID.Equals(user.ID)
                 && p.Name.ToLower().Contains(filter.ToLower()));
 
             foreach (People p in pp)
@@ -39,6 +43,7 @@ namespace ParrotWings.Controllers
 
         // GET: api/People/5
         [ResponseType(typeof(Transaction))]
+        [Authorize]
         public IHttpActionResult GetPeople(Guid id)
         {
             People people = db.Peoples.Find(id);
@@ -88,6 +93,14 @@ namespace ParrotWings.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        
+        public People CurrentPeople()
+        {
+            Guid ID = new Guid(User.Identity.GetUserId());
+
+            return db.Peoples
+                .FirstOrDefault(x => x.IdentityId.Equals(ID));
         }
 
         //private bool PeopleExists(Guid id)

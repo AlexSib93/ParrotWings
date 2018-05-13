@@ -164,15 +164,23 @@
 
             $("#recepient").autocomplete({
                 source:
-                    function (request, response) {
+                function (request, response) {
 
-                        $.getJSON(
-                            '/api/filteredPeoples',
-                            { filter: $('input#recepient').val() },
-                            function (data) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/api/filteredPeoples',
+                        data: { filter: $('input#recepient').val() },
+                        success: function (data) {
                             response(data);
-                        });
-                    },
+                        },
+                        beforeSend: function (xhr) {
+                            var tokenKey = "tokenInfo";
+                            var token = sessionStorage.getItem(tokenKey);
+                            console.log("token ", token);
+                            xhr.setRequestHeader("Authorization", "Bearer " + token);
+                        }
+                    });
+                },
                 search: function (event) {
                     $("#txtPeopleID").val('');
                 },

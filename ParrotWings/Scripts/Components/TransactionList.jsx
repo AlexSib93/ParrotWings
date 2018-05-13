@@ -38,6 +38,7 @@ class TransactinList extends React.Component {
 
         console.log('TransactionList.State', this.state.transactions );
         return (
+            <div>
             <table>
                 <thead>
                     <th>People</th>
@@ -47,30 +48,27 @@ class TransactinList extends React.Component {
                 </thead>
                 <TransactionRows transactions={this.state.transactions} />
             </table>
+            <button onClick={this.refresh.bind(this)}>Refresh</button>
+            </div>
         );
     }
     componentDidMount() {
+        this.refresh();
+    }
+    refresh() {
         $.ajax({
             type: 'GET',
             url: '/api/transaction',
+            beforeSend: function (xhr) {
+                var tokenKey = "tokenInfo";
+                var token = sessionStorage.getItem(tokenKey);
+                console.log("token ", token);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
             success: function (data) {
                 this.setState({ transactions: data });
             }.bind(this)
         });
-
-        var data =
-            [{
-                Recepient: '123@mail',
-                People: '321@mail',
-                Amount: '1000',
-                DateTime: '02.03.2017'
-            },
-            {
-                Recepient: 'adfasdfad@mail',
-                People: '3adfads21@mail',
-                Amount: '10asd00',
-                DateTime: '02.03.sd2017'
-                }]
     }
 }
 
