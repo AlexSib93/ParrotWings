@@ -41,6 +41,22 @@ namespace ParrotWings.Controllers
             return peopleBM;
         }
 
+        // GET: api/People
+        [Route("api/PeopleState")]
+        [Authorize]
+        public IHttpActionResult GetTPeopleState()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                People user = CurrentPeople();
+                return Ok( new PeopleStateBindingModel() { PeopleName = user.Name });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         // GET: api/People/5
         [ResponseType(typeof(Transaction))]
         [Authorize]

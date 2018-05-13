@@ -10,4 +10,11 @@ namespace ParrotWings.Models
         public Guid id { get; set; }
         public string value { get; set; }
     }
+
+    public class PeopleStateBindingModel
+    {
+        public string PeopleName { get; set; }
+
+        public decimal Balance { get; set; }
+    }
 }
