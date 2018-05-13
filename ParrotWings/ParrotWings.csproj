@@ -262,27 +262,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805101700431_InitialCreate.cs" />
-    <Compile Include="Migrations\201805101700431_InitialCreate.Designer.cs">
-      <DependentUpon>201805101700431_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805101803573_DataMigration.cs" />
-    <Compile Include="Migrations\201805101803573_DataMigration.Designer.cs">
-      <DependentUpon>201805101803573_DataMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805101826349_DataMigration1.cs" />
-    <Compile Include="Migrations\201805101826349_DataMigration1.Designer.cs">
-      <DependentUpon>201805101826349_DataMigration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805101832020_DataMigration2.cs" />
-    <Compile Include="Migrations\201805101832020_DataMigration2.Designer.cs">
-      <DependentUpon>201805101832020_DataMigration2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805131415118_AddBalanceHistory.cs" />
-    <Compile Include="Migrations\201805131415118_AddBalanceHistory.Designer.cs">
-      <DependentUpon>201805131415118_AddBalanceHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -307,21 +286,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805101700431_InitialCreate.resx">
-      <DependentUpon>201805101700431_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805101803573_DataMigration.resx">
-      <DependentUpon>201805101803573_DataMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805101826349_DataMigration1.resx">
-      <DependentUpon>201805101826349_DataMigration1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805101832020_DataMigration2.resx">
-      <DependentUpon>201805101832020_DataMigration2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805131415118_AddBalanceHistory.resx">
-      <DependentUpon>201805131415118_AddBalanceHistory.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
