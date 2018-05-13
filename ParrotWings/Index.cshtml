@@ -167,16 +167,10 @@
                     function (request, response) {
 
                         $.getJSON(
-                            '',
+                            '/api/filteredPeoples',
                             { filter: $('input#recepient').val() },
                             function (data) {
-
-                            var suggestions = []; // массив для хранения результатов
-                            $.each(data, function (key, val) {
-                                suggestions.push(val.value); // добавляем все элементы
-                            });
-
-                            response(suggestions);
+                            response(data);
                         });
                     },
                 search: function (event) {
@@ -184,6 +178,10 @@
                 },
                 select: function (event, ui) {
                     $("#txtPeopleID").val(ui.item.id);
+                },
+                messages: {
+                    noResults: '',
+                    results: function () { }
                 }
             }); 
             

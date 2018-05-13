@@ -16,15 +16,19 @@ namespace ParrotWings.Controllers
         private PWContext db = new PWContext();
 
         // GET: api/People
-        public List<PeopleBindingModel> GetTPeoples()
+        [Route("api/filteredPeoples")]
+        public List<PeopleBindingModel> GetTPeoples(string filter)
         {
             List<PeopleBindingModel> peopleBM = new List<PeopleBindingModel>();
 
-            var pp = db.Peoples.Where(p => p.ID.ToString() != "9988BF03-1F29-48EA-9599-090A8217EFBE");
+            var pp = db.Peoples.Where(p =>
+                p.ID.ToString() != "9988BF03-1F29-48EA-9599-090A8217EFBE"
+                && p.Name.ToLower().Contains(filter.ToLower()));
 
             foreach (People p in pp)
             {
-                peopleBM.Add(new PeopleBindingModel(){
+                peopleBM.Add(new PeopleBindingModel()
+                {
                     id = p.ID,
                     value = p.Name
                 });
