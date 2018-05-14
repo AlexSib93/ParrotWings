@@ -2,7 +2,7 @@
     constructor(props) {
         super(props)
         this.state = {
-            show: true,
+            show: false,
             correspondentValid: true,
             amountValid: true
         }
@@ -21,6 +21,7 @@
                     <ComponentWithModalDialog text="Amount can not be empty" show={!this.state.amountValid} /><br />
 
                     <input type="submit" id="confirmTransaction" value="Create" onClick={this.createTransaction.bind(this)} />
+                    <button style={{float: 'right'}} onClick={this.hidden.bind(this)}>Cancel</button>
                 </div>
             </dialog>
         );

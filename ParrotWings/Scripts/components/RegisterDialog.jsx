@@ -41,6 +41,7 @@
                     <ComponentWithModalDialog text="Date not valid" show={!this.state.birthdayValid} /><br /><br />
 
                     <input type="submit" value="Register" onClick={this.register.bind(this)} />
+                    <button style={{ float: 'right' }} onClick={this.hidden.bind(this)}>Cancel</button>
                 </div>
             </dialog>
         );

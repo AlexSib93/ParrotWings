@@ -62,8 +62,9 @@ class AutorizedForm extends React.Component {
     render() {
         return (
             <div>
-                <h4>Hello, {this.props.peopleName}! balance: --{this.props.balance} PW--
-                <button onClick={this.logout.bind(this)}>Logout</button> </h4>
+                <h4>Hello, {this.props.peopleName}! <button onClick={this.logout.bind(this)}>Logout</button> </h4>
+                <h3>balance: --{this.props.balance} PW-- <button onClick={this.createTransact.bind(this)}>Create transaction</button> </h3>
+                <CreateTransactionDialog ref="transactCreation"/>
             </div>
         );
     }
@@ -71,6 +72,9 @@ class AutorizedForm extends React.Component {
         var tokenKey = "tokenInfo";
         sessionStorage.removeItem(tokenKey);
         this.props.updateState();
+    }
+    createTransact() {
+        this.refs.transactCreation.show();
     }
 }
 
