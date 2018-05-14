@@ -19,5 +19,13 @@
             Comment = comment;
             People = people;
         }
+
+        public Balance(People people, decimal value, string comment, Transaction transact)
+        {
+            Value = value;
+            Comment = comment;
+            People = people;
+            Transaction = transact;
+        }
     }
 }

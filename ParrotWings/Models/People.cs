@@ -43,7 +43,8 @@ namespace ParrotWings.Models
             {
                 using (PWContext db = new PWContext())
                 {
-                    return db.Balances.OrderByDescending(x => x.DtCreaate).FirstOrDefault().Value;
+                    return db.Balances.Where(x=>x.People.ID.Equals(this.ID))
+                        .OrderByDescending(x => x.DtCreaate).FirstOrDefault().Value;
                 }
             }
             private set { }

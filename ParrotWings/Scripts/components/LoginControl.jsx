@@ -62,8 +62,8 @@ class AutorizedForm extends React.Component {
     render() {
         return (
             <div>
-                <h4>Hello, {this.props.peopleName}! balance: --{this.props.balance} PW--</h4>
-                <button onClick={this.logout.bind(this)}>Logout</button>
+                <h4>Hello, {this.props.peopleName}! balance: --{this.props.balance} PW--
+                <button onClick={this.logout.bind(this)}>Logout</button> </h4>
             </div>
         );
     }

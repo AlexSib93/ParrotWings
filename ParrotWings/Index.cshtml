@@ -12,14 +12,14 @@
 </head>
 <body>
     <div id="LoginControl"> </div>
-           
+           <div id="createTransactionDialog"> </div>
     <div id="createTransaction"></div>  
-        <h1> New transaction </h1><br />
+        @*<h1> New transaction </h1><br />
         <label>Choose the recipient</label><br /><div id="txtPeopleID"></div>
         <input type="text" id="recepient" /><br /><br />
         <label>Amount of transaction</label><br />
         <input type="number" id="amount" step="100" required /><br />        
-        <input type="submit" id="confirmTransaction" value="Create" />
+        <input type="submit" id="confirmTransaction" value="Create" />*@
     <br /><br />
 
    <div id="transactionList"> </div>
@@ -38,86 +38,6 @@
     <script src="~/Scripts/components/ComponentWithModalDialog.jsx"></script>
     <script src="~/Scripts/components/RegisterDialog.jsx"></script>
     <script src="~/Scripts/components/LoginControl.jsx"></script>
-        <script type="text/javascript">
-            $(function () {
-                $('#confirmTransaction').click(function (e) {
-                    e.preventDefault();
-                    var data = {
-                        RecepientID: $('#txtPeopleID').val(),
-                        Amount: $('#amount').val()
-                    };
-
-                    console.log("new transaction", data);
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/Transaction',
-                        contentType: 'application/json; charset=utf-8',
-                        data: JSON.stringify(data),
-                        success: function (data) {
-                            alert("Transaction successfully created!")
-                        },
-                        fail: function (data) {
-                            alert("Creating a transaction failed" + data)
-                        }
-                    });
-                });
-            });
-
-
-            $('#getpeople').click(function (e) {
-                var tokenKey = "tokenInfo";
-                $.ajax({
-                    type: 'Get',
-                    url: '/api/people',
-                    beforeSend: function (xhr) {
-                        var token = sessionStorage.getItem(tokenKey);
-                        xhr.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                }).success(function (data) {
-
-                    alert('При Get people all good');
-                    console.log('Get people good!');
-                }).fail(function (data) {
-                    alert('При Get people возникла ошибка');
-                    console.log('Get people bad!');
-                });
-            });            
-
-            $("#recepient").autocomplete({
-                source:
-                function (request, response) {
-
-                    $.ajax({
-                        type: 'GET',
-                        url: '/api/filteredPeoples',
-                        data: { filter: $('input#recepient').val() },
-                        success: function (data) {
-                            response(data);
-                        },
-                        beforeSend: function (xhr) {
-                            var tokenKey = "tokenInfo";
-                            var token = sessionStorage.getItem(tokenKey);
-                            console.log("token ", token);
-                            xhr.setRequestHeader("Authorization", "Bearer " + token);
-                        }
-                    });
-                },
-                search: function (event) {
-                    $("#txtPeopleID").val('');
-                },
-                select: function (event, ui) {
-                    $("#txtPeopleID").val(ui.item.id);
-                },
-                messages: {
-                    noResults: '',
-                    results: function () { }
-                }
-            }); 
-            
-
-    </script>
-
-        
+    <script src="~/Scripts/components/CreateTransactionDialog.jsx"></script>
 </body>
 </html>

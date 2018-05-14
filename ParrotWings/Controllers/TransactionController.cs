@@ -51,6 +51,7 @@ namespace ParrotWings
         // POST: api/Transaction
         [Authorize]
         [ResponseType(typeof(Transaction))]
+        [Route("api/createTransaction")]
         public IHttpActionResult PostTransaction(CreateTransactionBindingModel transaction)
         {
             if (!ModelState.IsValid)
@@ -66,6 +67,20 @@ namespace ParrotWings
                 Amount = transaction.Amount,
                 DateTime = DateTime.Now
             };
+
+            //User balance
+            db.Balances.Add(
+                new Balance(newTransaction.People, 
+                    newTransaction.People.Balance - newTransaction.Amount, 
+                    "User transaction", 
+                    newTransaction));
+            
+            //Correspondent balance
+            db.Balances.Add(
+               new Balance(newTransaction.Correspondent,
+                   newTransaction.Correspondent.Balance + newTransaction.Amount,
+                   "Correspondent transaction",
+                   newTransaction));
 
             db.Entry(newTransaction.Correspondent).State = EntityState.Unchanged;
             db.Entry(newTransaction.People).State = EntityState.Unchanged;
