@@ -107,6 +107,7 @@
     created(data) {
         alert("Transaction successfully created!");
         this.hidden();
+        this.props.updateUserState();
     }
 }
 

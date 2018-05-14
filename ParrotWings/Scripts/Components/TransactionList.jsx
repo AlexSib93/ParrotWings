@@ -6,6 +6,7 @@
             <td>{transaction.RecepientName}</td>
             <td>{transaction.Amount}</td>
             <td>{transaction.DateTime}</td>
+            <td>{transaction.ResultBalance}</td>
         </tr>
         
     return (
@@ -45,6 +46,7 @@ class TransactinList extends React.Component {
                     <th>Recepient</th>
                     <th>Amount</th>
                     <th>DateTime</th>
+                    <th>Result balance</th>
                 </thead>
                 <TransactionRows transactions={this.state.transactions} />
             </table>

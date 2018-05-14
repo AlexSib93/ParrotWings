@@ -18,21 +18,43 @@ namespace ParrotWings
         private PWContext db = new PWContext();
 
         // GET api/<controller>
-        [Authorize]
+        //[Authorize]
+        [AllowAnonymous]
         public IEnumerable<ShowTransactionBindingModel> Get()
         {
             People user = CurrentPeople();
 
-            return db.Transactions
-                .Where(x => x.People.ID.Equals(user.ID) || x.Correspondent.ID.Equals(user.ID))
-                    .Select(t => new ShowTransactionBindingModel
+            IEnumerable<ShowTransactionBindingModel> debetTransactions = db.Transactions
+                .Where(x => x.People.ID.Equals(user.ID))
+                .Join(db.Balances, 
+                    t=> new { transact = t.ID.ToString(), people = t.People.ID.ToString() }, 
+                    b => new { transact = b.Transaction.ID.ToString(), people = b.People.ID.ToString() },
+                    (t, b) => new ShowTransactionBindingModel
                     {
                         ID = t.ID,
                         RecepientName = t.Correspondent.Name,
                         PeopleName = t.People.Name,
                         DateTime = t.DateTime,
-                        Amount = t.Amount
+                        Amount = t.Amount,
+                        ResultBalance = b.Value
                     });
+
+            IEnumerable<ShowTransactionBindingModel> creditTransactions = db.Transactions
+                .Where(x => x.Correspondent.ID.Equals(user.ID))
+                    .Join(db.Balances, 
+                    t => new { transact = t.ID.ToString(), people = t.Correspondent.ID.ToString() }, 
+                    b => new { transact = b.Transaction.ID.ToString(), people = b.People.ID.ToString() },
+                    (t,b) => new ShowTransactionBindingModel
+                    {
+                        ID = t.ID,
+                        RecepientName = t.Correspondent.Name,
+                        PeopleName = t.People.Name,
+                        DateTime = t.DateTime,
+                        Amount = t.Amount,
+                        ResultBalance = b.Value
+                    });
+
+            return debetTransactions.Union(creditTransactions).OrderByDescending(x => x.DateTime);
         }
 
         // GET api/<controller>/5

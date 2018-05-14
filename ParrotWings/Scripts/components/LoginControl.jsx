@@ -14,7 +14,7 @@
         return (
             <div>
                 {this.state.isAutorized
-                    ? <AutorizedForm peopleName={this.state.peopleName} balance={this.state.balance} updateState={this.getState.bind(this)} />
+                    ? <AutorizedForm updateState={this.getState.bind(this)} peopleName={this.state.peopleName} balance={this.state.balance} updateState={this.getState.bind(this)} />
                     : <NotAutorizedForm updateState={this.getState.bind(this)}/>}
             </div>
         );
@@ -64,7 +64,7 @@ class AutorizedForm extends React.Component {
             <div>
                 <h4>Hello, {this.props.peopleName}! <button onClick={this.logout.bind(this)}>Logout</button> </h4>
                 <h3>balance: --{this.props.balance} PW-- <button onClick={this.createTransact.bind(this)}>Create transaction</button> </h3>
-                <CreateTransactionDialog ref="transactCreation"/>
+                <CreateTransactionDialog updateUserState={this.props.updateState.bind(this)} ref="transactCreation" />
             </div>
         );
     }
