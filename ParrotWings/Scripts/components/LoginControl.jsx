@@ -100,10 +100,8 @@ class NotAutorizedForm extends React.Component {
             </div>
         );
     }
-    componentDidMount() {
-        this.showPopup();
-    }
     login() {
+        if (this.validate()) {
             var loginData = {
                 grant_type: 'password',
                 username: this.refs.loginmail.value,
@@ -118,6 +116,7 @@ class NotAutorizedForm extends React.Component {
                 ).fail(function (data) {
                     alert('Autorization error. Please, check your mail and password!');
                 });
+        }
     }
     Logined(data) {
         var tokenKey = "tokenInfo";
@@ -137,95 +136,6 @@ class NotAutorizedForm extends React.Component {
             passValid: pvalid
         })
         return lvalid && pvalid;
-    }
-}
-
-class ComponentWithModalDialog extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            show: props.show,
-            text: props.text,
-            float: props.float
-        }
-    }
-    render() {
-        if (this.props.show) {
-            return <span style={{ float: this.state.float, color:'red' }}>{this.state.text}</span>;
-        }
-        else {
-            return <span></span>;
-        }
-    }
-}
-
-
-
-class RegisterDialog extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            show: false
-        }
-    }
-    render() {
-        return (
-            <dialog id="regDialog" style={{display: this.state.show ? 'block' : 'none' }}>
-                <div>
-                    <label>Email</label><br />
-                    <input type="email" ref='mail' /> <br /><br />
-                    <label>Password</label><br />
-                    <input type="password" ref='pass'  /><br /><br />
-                    <label>Confirm password</label><br />
-                    <input type="password" ref='confirmpass' /><br /><br />
-                    <label>First name</label><br />
-                    <input type="text" ref='firstname' /><br /><br />
-                    <label>Last name</label><br />
-                    <input type="text" ref='lastname' /><br /><br />
-                    <label>Middle name</label><br />
-                    <input type="text" ref='middlename' /><br /><br />
-                    <label>Birthday</label><br />
-                    <input type="date" ref='birthday' /><br /><br />
-                    <input type="submit" value="Register" onClick={this.register.bind(this)} />
-                </div>
-            </dialog>
-        );
-    }
-    show() {
-        console.log('try to show')
-        this.setState({
-            show: true
-        })
-    }
-    hidden() {
-        this.setState({
-            show: false
-        })
-    }
-    register() {
-        console.log('123', this.refs)
-        var data = {
-            Email: this.refs.mail.value,
-            Password: this.refs.pass.value,
-            ConfirmPassword: this.refs.confirmpass.value,            
-            Name: this.refs.firstname.value,
-            LasName: this.refs.lastname.value,
-            MiddleName: this.refs.middlename.value,
-            Birthday: this.refs.birthday.value
-        };
-        $.ajax({
-            type: 'POST',
-            url: '/api/Account/Register',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data),
-            success: function (data) {
-                alert("Success!" + data)
-            },
-            fail: function (data) {
-                alert("Failed!" + data)
-            }
-        });
-        this.hidden()
     }
 }
 
