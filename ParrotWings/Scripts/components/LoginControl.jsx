@@ -89,6 +89,8 @@ class NotAutorizedForm extends React.Component {
                 <label>Password</label><br />
                 <input type="password" ref={(input) => { this.passwordInput = input; }} /><br /><br />
                 <input type="submit" value="Login" onClick={this.login.bind(this)} />
+                <input type="submit" id="regDalogShow" value="Register" onClick={this.showDiag.bind(this)} />
+                <RegisterDialog ref="dialog"/>
             </div>
         );
     }
@@ -113,6 +115,80 @@ class NotAutorizedForm extends React.Component {
         var tokenKey = "tokenInfo";
         sessionStorage.setItem(tokenKey, data.access_token);
         this.props.updateState();
+    }
+    showDiag() {
+        console.log('1');
+        this.refs.dialog.show();
+        console.log('2');
+    }
+}
+
+class RegisterDialog extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            show: false
+        }
+    }
+    render() {
+        return (
+            <dialog id="regDialog" style={{display: this.state.show ? 'block' : 'none' }}>
+                <div>
+                    <label>Email</label><br />
+                    <input type="email" ref='mail' /> <br /><br />
+                    <label>Password</label><br />
+                    <input type="password" ref='pass'  /><br /><br />
+                    <label>Confirm password</label><br />
+                    <input type="password" ref='confirmpass' /><br /><br />
+                    <label>First name</label><br />
+                    <input type="text" ref='firstname' /><br /><br />
+                    <label>Last name</label><br />
+                    <input type="text" ref='lastname' /><br /><br />
+                    <label>Birthday</label><br />
+                    <input type="date" ref='birthday' /><br /><br />
+                    <input type="submit" value="Register" onClick={this.register.bind(this)} />
+                </div>
+            </dialog>
+        );
+    }
+    show() {
+        console.log('try to show')
+        this.setState({
+            show: true
+        })
+    }
+    hidden() {
+        this.setState({
+            show: false
+        })
+    }
+    register() {
+        console.log('123', this.refs)
+        var data = {
+            Email: this.refs.mail.value,
+            Password: this.refs.pass.value,
+            ConfirmPassword: this.refs.confirmpass.value,            
+            Name: this.refs.firstname.value,
+            LasName: this.refs.lastname.value,
+            Birthday: this.refs.birthday.value
+        };
+
+        console.log("asdfasd", data);
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/Account/Register',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            success: function (data) {
+                alert("Success!" + data)
+            },
+            fail: function (data) {
+                alert("Failed!" + data)
+            }
+        });
+
+        this.hidden()
     }
 }
 
