@@ -262,6 +262,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805132317244_InitialCreate.cs" />
+    <Compile Include="Migrations\201805132317244_InitialCreate.Designer.cs">
+      <DependentUpon>201805132317244_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Balance.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -286,7 +291,9 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <EmbeddedResource Include="Migrations\201805132317244_InitialCreate.resx">
+      <DependentUpon>201805132317244_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

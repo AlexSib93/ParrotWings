@@ -11,6 +11,10 @@ namespace ParrotWings.Models
 
         public People Correspondent { get; set; }
 
+        public Balance PeopleResultBalance { get; set; }
+
+        public Balance CorrespondentResultBalance { get; set; }
+
         public string Number { get; set; }
 
         public decimal Amount { get; set; }
