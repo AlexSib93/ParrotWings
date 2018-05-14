@@ -13,11 +13,9 @@
     render() {
         return (
             <div>
-                <h3> HelloLoginControl</h3>
                 {this.state.isAutorized
                     ? <AutorizedForm peopleName={this.state.peopleName} balance={this.state.balance} updateState={this.getState.bind(this)} />
                     : <NotAutorizedForm updateState={this.getState.bind(this)}/>}
-                <button onClick={this.getState.bind(this)}>GetState</button>
             </div>
         );
     }
@@ -85,22 +83,27 @@ class NotAutorizedForm extends React.Component {
         }
     }
     render() {
+        console.log('wtf2', !this.state.passValid)
         return (
             <div class="NotAutorizedForm">
-                <h3>Autorization</h3>
-                <label>Email</label><br />
-                <input type="email" ref="loginmail" style={{ borderColor: this.state.mailValid ? '' : 'red' }} required /> <br /><br />
+            <div>
+                <label>Email</label><br />            
+                <input type="email" ref="loginmail" style={{ borderColor: this.state.mailValid ? '' : 'red' }} required />
+                <ComponentWithModalDialog text="Not valid mail" show={!this.state.mailValid} /> <br /><br />
+            </div>
                 <label>Password</label><br />
-                <input type="password" ref="loginpassword" style={{ borderColor: this.state.passValid ? '' : 'red' }} required /><br /><br />
+                <input type="password" ref="loginpassword" style={{ borderColor: this.state.passValid ? '' : 'red' }} required />
+                <ComponentWithModalDialog text="Password can not be empty" show={!this.state.passValid} /><br /><br />
                 <input type="submit" value="Login" onClick={this.login.bind(this)} />
                 <input type="submit" id="regDalogShow" value="Register" onClick={this.showDiag.bind(this)} />
                 <RegisterDialog ref="dialog" />
             </div>
         );
     }
+    componentDidMount() {
+        this.showPopup();
+    }
     login() {
-        
-        if (this.validate()) {
             var loginData = {
                 grant_type: 'password',
                 username: this.refs.loginmail.value,
@@ -115,10 +118,6 @@ class NotAutorizedForm extends React.Component {
                 ).fail(function (data) {
                     alert('Autorization error. Please, check your mail and password!');
                 });
-        }
-        else {
-            alert('Enter valid email and password!')
-        }
     }
     Logined(data) {
         var tokenKey = "tokenInfo";
@@ -140,6 +139,27 @@ class NotAutorizedForm extends React.Component {
         return lvalid && pvalid;
     }
 }
+
+class ComponentWithModalDialog extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            show: props.show,
+            text: props.text,
+            float: props.float
+        }
+    }
+    render() {
+        if (this.props.show) {
+            return <span style={{ float: this.state.float, color:'red' }}>{this.state.text}</span>;
+        }
+        else {
+            return <span></span>;
+        }
+    }
+}
+
+
 
 class RegisterDialog extends React.Component{
     constructor(props) {
