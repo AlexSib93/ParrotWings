@@ -9,16 +9,16 @@
     }
     render() {
         return (
-            <dialog id="regDialog2" style={{ display: this.state.show ? 'block' : 'none', width: '50%' }}>
+            <dialog id="regDialog2" style={{ display: this.state.show ? 'block' : 'none', width: '80%' }}>
                 <div>
                     <h1> New transaction </h1><br />
-                    <label>Choose the recipient</label><br /><input type="hidden" id="txtPeopleID" ref="correspondentId" required />
+                    <label>Choose the recipient</label><br /><input type="text" style={{display: 'none'}} id="txtPeopleID" ref="correspondentId" minLength="1" required />
                     <input type="text" id="correspondent" ref="correspondentName" style={{ borderColor: this.state.correspondentValid ? '' : 'red' }} required />
                     <ComponentWithModalDialog text="Name can not be empty" show={!this.state.correspondentValid} /><br />
 
                     <label>Amount of transaction</label><br />
-                    <input type="number" ref="amount" id="amount" step="100" style={{ borderColor: this.state.amountValid ? '' : 'red' }} required />
-                    <ComponentWithModalDialog text="Name can not be empty" show={!this.state.amountValid} /><br />
+                    <input type="number" ref="amount" id="amount" style={{ borderColor: this.state.amountValid ? '' : 'red' }} required />
+                    <ComponentWithModalDialog text="Amount can not be empty" show={!this.state.amountValid} /><br />
 
                     <input type="submit" id="confirmTransaction" value="Create" onClick={this.createTransaction.bind(this)} />
                 </div>
@@ -70,8 +70,6 @@
         });
     }
     createTransaction() {
-        console.log( 'WTWTF',this.refs.correspondentId.value,
-            this.refs.amount.value);
         if (this.validate()) {
             var data = {
                 RecepientID: this.refs.correspondentId.value,
@@ -88,15 +86,12 @@
                     var token = sessionStorage.getItem(tokenKey);
                     xhr.setRequestHeader("Authorization", "Bearer " + token);
                 },
-                success: function (data) {
-                    alert("Transaction successfully created!")
-                },
+                success: this.created.bind(this),
                 fail: function (data) {
-                    alert("Creating a transaction faile.")
+                    alert("Creating a transaction fail.")
                 }
             });
         }
-        this.hidden()
     }
     validate() {
         var cvalid = this.refs.correspondentId.checkValidity()
@@ -105,7 +100,12 @@
             correspondentValid: cvalid,
             amountValid: avalid
         })
+        console.log(this.refs.correspondentId.checkValidity())
         return cvalid && avalid;
+    }
+    created(data) {
+        alert("Transaction successfully created!");
+        this.hidden();
     }
 }
 
