@@ -12,36 +12,36 @@
     }
     render() {
         return (
-            <dialog id="regDialog" style={{ display: this.state.show ? 'block' : 'none', width:'50%' }}>
+            <dialog id="regDialog" className='container' style={{ display: this.state.show ? 'block' : 'none' }}>
                 <div>
                     <label>Email</label><br />
-                    <input type="email" ref='mail' style={{ borderColor: this.state.mailValid ? '' : 'red' }} required /> 
+                    <input type="email" ref='mail' className='form-control' style={{ borderColor: this.state.mailValid ? '' : 'red' }} required /> 
                     <ComponentWithModalDialog text="Not valid mail" show={!this.state.mailValid} /><br /><br />
 
                     <label>Password</label><br />
-                    <input type="password" ref='pass' style={{ borderColor: this.state.passValid ? '' : 'red' }} required />
+                    <input type="password" ref='pass' className='form-control' style={{ borderColor: this.state.passValid ? '' : 'red' }} required />
                     <ComponentWithModalDialog text="Not valid password" show={!this.state.passValid} /><br /><br />
 
                     <label>Confirm password</label><br />
-                    <input type="password" ref='confirmpass' style={{ borderColor: this.state.confirmpassValid ? '' : 'red' }} required />
+                    <input type="password" ref='confirmpass' className='form-control' style={{ borderColor: this.state.confirmpassValid ? '' : 'red' }} required />
                     <ComponentWithModalDialog text="Not valid password" show={!this.state.confirmpassValid} /><br /><br />
 
                     <label>First name</label><br />
-                    <input type="text" ref='firstname' style={{ borderColor: this.state.nameValid ? '' : 'red' }} required />
+                    <input type="text" ref='firstname' className='form-control' style={{ borderColor: this.state.nameValid ? '' : 'red' }} required />
                     <ComponentWithModalDialog text="Name can not be empty" show={!this.state.nameValid} /><br /><br />
 
                     <label>Last name</label><br />
-                    <input type="text" ref='lastname' /><br /><br />
+                    <input type="text" ref='lastname' className='form-control' /><br /><br />
 
                     <label>Middle name</label><br />
-                    <input type="text" ref='middlename' /><br /><br />
+                    <input type="text" className='form-control' ref='middlename' /><br /><br />
 
                     <label>Birthday</label><br />
-                    <input type="date" ref='birthday' style={{ borderColor: this.state.birthdayValid ? '' : 'red' }}/>
+                    <input type="date" className='form-control' ref='birthday' style={{ borderColor: this.state.birthdayValid ? '' : 'red' }}/>
                     <ComponentWithModalDialog text="Date not valid" show={!this.state.birthdayValid} /><br /><br />
 
-                    <input type="submit" value="Register" onClick={this.register.bind(this)} />
-                    <button style={{ float: 'right' }} onClick={this.hidden.bind(this)}>Cancel</button>
+                    <input type="submit" className='btn btn-success' value="Register" onClick={this.register.bind(this)} />
+                    <button className='btn btn-default'  style={{ float: 'right' }} onClick={this.hidden.bind(this)}>Cancel</button>
                 </div>
             </dialog>
         );

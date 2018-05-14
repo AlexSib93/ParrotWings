@@ -1,34 +1,4 @@
-﻿function TransactionRow(props) {
-    const { transaction } = props
-    const body =
-        <tr >
-            <td>{transaction.PeopleName}</td>
-            <td>{transaction.RecepientName}</td>
-            <td>{transaction.Amount}</td>
-            <td>{transaction.DateTime}</td>
-            <td>{transaction.ResultBalance}</td>
-        </tr>
-        
-    return (
-        <div>
-            {body}
-        </div>
-    );
-}
-
-function TransactionRows(props) {
-    const TransactionElements = props.transactions.map(transaction =>
-            <TransactionRow transaction={transaction} />)
-
-    return (
-        <tbody>
-            {TransactionElements}
-        </tbody>
-    );
-
-}
-
-class TransactinList extends React.Component {
+﻿class TransactinList extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -36,21 +6,21 @@ class TransactinList extends React.Component {
         }
     }
     render() {
-
-        console.log('TransactionList.State', this.state.transactions );
         return (
-            <div>
-            <table>
-                <thead>
-                    <th>People</th>
-                    <th>Recepient</th>
-                    <th>Amount</th>
-                    <th>DateTime</th>
-                    <th>Result balance</th>
-                </thead>
-                <TransactionRows transactions={this.state.transactions} />
-            </table>
-            <button onClick={this.refresh.bind(this)}>Refresh</button>
+            <div className='container table-responsive'>
+                <table className='table table-bordered table-hover'>
+                    <thead>
+                        <tr className='active'>
+                            <th>People</th>
+                            <th>Correspondent</th>
+                            <th>Amount</th>
+                            <th>DateTime</th>
+                            <th>Result balance</th>
+                        </tr>
+                    </thead>
+                    <TransactionRows transactions={this.state.transactions} />
+                </table>
+                <button className='btn' onClick={this.refresh.bind(this)}>Refresh</button>
             </div>
         );
     }
@@ -74,7 +44,28 @@ class TransactinList extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <TransactinList />,
-    document.getElementById("transactionList")
-);
+function TransactionRow(props) {
+    const { transaction } = props
+    const body =
+        <tr >
+            <td>{transaction.PeopleName}</td>
+            <td>{transaction.RecepientName}</td>
+            <td>{transaction.Amount}</td>
+            <td>{(new Date(transaction.DateTime)).toDateString()}</td>
+            <td>{transaction.ResultBalance}</td>
+        </tr>
+
+    return (body);
+}
+
+function TransactionRows(props) {
+    const TransactionElements = props.transactions.map(transaction =>
+        <TransactionRow transaction={transaction} />)
+
+    return (
+        <tbody>
+            {TransactionElements}
+        </tbody>
+    );
+
+}
