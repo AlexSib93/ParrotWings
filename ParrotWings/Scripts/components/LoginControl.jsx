@@ -78,38 +78,47 @@ class AutorizedForm extends React.Component {
 
 class NotAutorizedForm extends React.Component {
     constructor(props) {
-        super(props);        
+        super(props);
+        this.state = {
+            mailValid: true,
+            passValid: true
+        }
     }
     render() {
         return (
             <div class="NotAutorizedForm">
                 <h3>Autorization</h3>
                 <label>Email</label><br />
-                <input type="email" ref={(input) => { this.loginInput = input; }} /> <br /><br />
+                <input type="email" ref="loginmail" style={{ borderColor: this.state.mailValid ? '' : 'red' }} required /> <br /><br />
                 <label>Password</label><br />
-                <input type="password" ref={(input) => { this.passwordInput = input; }} /><br /><br />
+                <input type="password" ref="loginpassword" style={{ borderColor: this.state.passValid ? '' : 'red' }} required /><br /><br />
                 <input type="submit" value="Login" onClick={this.login.bind(this)} />
                 <input type="submit" id="regDalogShow" value="Register" onClick={this.showDiag.bind(this)} />
-                <RegisterDialog ref="dialog"/>
+                <RegisterDialog ref="dialog" />
             </div>
         );
     }
     login() {
-        var loginData = {
-            grant_type: 'password',
-            username: this.loginInput.value,
-            password: this.passwordInput.value
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: '/Token',
-            data: loginData
-        }).success(
-            this.Logined.bind(this)
-        ).fail(function (data) {
-            alert('При логине возникла ошибка');
-        });
+        
+        if (this.validate()) {
+            var loginData = {
+                grant_type: 'password',
+                username: this.refs.loginmail.value,
+                password: this.refs.loginpassword.value
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/Token',
+                data: loginData
+            }).success(
+                this.Logined.bind(this)
+                ).fail(function (data) {
+                    alert('Autorization error. Please, check your mail and password!');
+                });
+        }
+        else {
+            alert('Enter valid email and password!')
+        }
     }
     Logined(data) {
         var tokenKey = "tokenInfo";
@@ -120,6 +129,15 @@ class NotAutorizedForm extends React.Component {
         console.log('1');
         this.refs.dialog.show();
         console.log('2');
+    }
+    validate() {
+        var lvalid = this.refs.loginmail.checkValidity()
+        var pvalid = this.refs.loginpassword.checkValidity()
+        this.setState({
+            mailValid: lvalid,
+            passValid: pvalid
+        })
+        return lvalid && pvalid;
     }
 }
 
@@ -175,9 +193,6 @@ class RegisterDialog extends React.Component{
             MiddleName: this.refs.middlename.value,
             Birthday: this.refs.birthday.value
         };
-
-        console.log("asdfasd", data);
-
         $.ajax({
             type: 'POST',
             url: '/api/Account/Register',
@@ -190,7 +205,6 @@ class RegisterDialog extends React.Component{
                 alert("Failed!" + data)
             }
         });
-
         this.hidden()
     }
 }
