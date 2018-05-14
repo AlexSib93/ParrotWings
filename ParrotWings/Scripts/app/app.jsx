@@ -1,90 +1,14 @@
-﻿//import React from 'React'
-//import {render} from 'react-dom'
-
-class Hello extends React.Component {
+﻿
+class App extends React.Component {
     render() {
-        return <h1>Привет, React.JS</h1>;
+        return <LoginControl />;
     }
 }
 
 ReactDOM.render(
-    <Hello />,
-    document.getElementById("content")
+    <App />,
+    document.getElementById("app")
 );
-
-//class UserInfo extends React.Component {
-//    constructor(props) {
-//        super(props);
-//        this.state = { data: props.login };
-//    }
-//    render() {
-//        return (
-//            <div>
-//                <div>
-//                    <div className='card'>
-//                        <h1>Sibiryakov Alexandr</h1>
-//                    </div>
-//                    <div style={{ float: 'right' }}>
-//                        <button >Exit</button>
-//                    </div>
-//                </div>
-//                <div>
-//                    <h2>- 7000 PW -</h2>
-//                </div>
-//            </div>
-//        );
-//    }
-//}
-
-//class InputAutocomplete extends React.Component {
-//    constructor(props) {
-//        super(props)
-//        this.state = {
-//            SelectedId: null,
-//            availableTags: [
-//                { value: "Испанский", id: "6E49B2B05445" },
-//                { value: "Итальянский", id: "6E49B2B05445" },
-//                { value: "Английский", id: "6E49B2B05445" },
-//                { value: "Китайский", id: "6E49B2B05445" },
-//                { value: "Русский", id: "6E49B2B05445" }]
-//        }
-//        console.log("good", this.state.availableTags);
-//    }
-//    render() {
-//        return (
-//            <div>
-//                <div id="txtAllowSearchID"></div>
-//                <label>Choose People</label>
-//                <input id="autocompl" type="text" />
-//                <button id="showbutton">Show compl</button>
-//            </div>
-//        );
-//    }
-//    componentDidMount() {
-//        console.log("may be good?");
-//        $("#autocompl").autocomplete({
-//            source: availableTags
-//        });
-//        //    search: function (event) {
-//        //        ////$("#txtAllowSearchID").val('');
-//        //        //this.setState(
-//        //        //    { SelectedId: null }
-//        //        //);
-//        //    },
-//        //    select: function (event, ui) {
-//        //        //// $("#txtAllowSearchID").val(ui.item.id);
-//        //        //this.setState(
-//        //        //    { SelectedId: ui.item.id }
-//        //        //);
-//        //    }
-//        //});
-//        //$('#showbutton').click(function () {
-//        //    alert($("#txtAllowSearchID").val()) // get the id from the hidden input
-//        //});
-//        console.log("yes, all good!");
-//    }   
-
-//}
 
 class TransactionCreator extends React.Component {
     constructor(props) {
@@ -139,11 +63,6 @@ class TransactionCreator extends React.Component {
     createTransaction() {
         var transaction = JSON.stringify(this.state);
         console.log("111", transaction);
-        //console.log('123123123123', transaction);
-        //var request = new XMLHttpRequest();
-        //request.open('POST', '/api/transaction', true);
-        //request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        //request.send(transaction);
 
         $.ajax({
             url: '/api/transaction/',
@@ -158,65 +77,9 @@ class TransactionCreator extends React.Component {
             }
         });
 
-        //if (request.status != 200) {
-        //    // обработать ошибку
-        //    alert(request.status + ': ' + request.statusText +'ДЕЛА вот такие'); // пример вывода: 404: Not Found
-        //} else {
-        //    // вывести результат
-        //    alert(request.responseText + 'вОТ ТАКИЕ ДЕЛА'); // responseText -- текст ответа.
-        //}
-
         console.log('----', this.state)
     }
 }
-
-//class TransactionRow extends React.Component {
-//    constructor(props) {
-//        super(props)
-//        this.state = {
-//            transaction = props.transaction
-//        }
-//    }
-//    render() {
-//        return (
-//            <tr>
-//                <td>{this.state.data.DateTime}</td>
-//                <td>{this.state.data.Correspondent}</td>
-//                <td>{this.state.data.Amount}</td>
-//                <td>{this.state.data.ResultBalance}</td>
-//            </tr>
-//        );
-//    }
-//}
-
-//class TransactionList ({ transactions }) {
-//    const transactionRows = transactions.map((transaction, index) =>
-//        <tr>
-//            <td>{this.state.data.DateTime}</td>
-//            <td>{this.state.data.Correspondent}</td>
-//            <td>{this.state.data.Amount}</td>
-//            <td>{this.state.data.ResultBalance}</td>
-//        </tr>
-//    )
-//    return (
-//        {transactionRows}    
-//    )
-//}
-
-//ReactDOM.render(
-//    <UserInfo />,
-//    document.getElementById("people-info")
-//);
-
-
-
-// file: Registration.jsx
-//var React = require('react')
-//var AccountFields = require('./AccountFields')
-//var SurveyFields = require('./SurveyFields')
-//var Confirmation = require('./Confirmation')
-//var Success = require('./Success')
-
 
 class TransactionCreation extends React.Component {
 
@@ -347,50 +210,6 @@ class Success extends React.Component {
         )
     }
 }
-
-//class LoginBox extends React.Component {
-//    constructor() {
-//        super()
-//        this.state = {
-//            showUserInfo: false,
-//            showLoginForms: true
-//        }
-//    }
-//    render() {
-//        return (
-//            <div>
-//                <div className="userInfo" style={{ display: this.state.showUserInfo ? "block" :"none" }}>
-//                    <p>Вы вошли как: <span className="userName"></span></p>
-//                    <input type="button" value="Выйти" id="logOut" onClick={this.collapseUserInfo.bind(this)} />
-//                </div>
-//                <div className="loginForm" style={{ display: this.state.showLoginForms ? "block" : "none" }}>
-//                    <h3>Вход на сайт</h3>
-//                    <label>Введите email</label><br />
-//                    <input type="email" id="emailLogin" /> <br /><br />
-//                    <label>Введите пароль</label><br />
-//                    <input type="password" id="passwordLogin" /><br /><br />
-//                    <input type="submit" id="submitLogin" value="Логин" />
-//                </div>
-//            </div>
-//        );
-//    }
-//    collapseUserInfo = () => {
-
-//        console.log("setState NOW!!!!", this.state);
-//        this.setState({
-//            showUserInfo: false,
-//            showLoginForms: true
-//        })
-
-
-//        console.log("setState Good!!!!", this.state);
-//    }
-//}
-
-ReactDOM.render(
-    <LoginBox />,
-    document.getElementById("LoginBox")
-);
 
 ReactDOM.render(
     <TransactionCreator />,

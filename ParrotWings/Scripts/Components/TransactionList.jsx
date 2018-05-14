@@ -60,7 +60,7 @@ function TransactionRow(props) {
 
 function TransactionRows(props) {
     const TransactionElements = props.transactions.map(transaction =>
-        <TransactionRow transaction={transaction} />)
+        <TransactionRow key={transaction.ID} transaction={transaction} />)
 
     return (
         <tbody>

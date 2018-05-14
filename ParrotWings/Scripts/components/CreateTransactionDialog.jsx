@@ -13,15 +13,15 @@
                 <div>
                     <h1> New transaction </h1><br />
                     <label>Choose the recipient</label><br /><input type="text" style={{display: 'none'}} id="txtPeopleID" ref="correspondentId" minLength="1" required />
-                    <input type="text" id="correspondent" ref="correspondentName" style={{ borderColor: this.state.correspondentValid ? '' : 'red' }} required />
+                    <input type="text" id="correspondent" className='form-control' ref="correspondentName" style={{ borderColor: this.state.correspondentValid ? '' : 'red' }} required />
                     <ComponentWithModalDialog text="Name can not be empty" show={!this.state.correspondentValid} /><br />
 
                     <label>Amount of transaction</label><br />
-                    <input type="number" ref="amount" id="amount" style={{ borderColor: this.state.amountValid ? '' : 'red' }} required />
+                    <input type="number" ref="amount" id="amount" className='form-control' style={{ borderColor: this.state.amountValid ? '' : 'red' }} required />
                     <ComponentWithModalDialog text="Amount can not be empty" show={!this.state.amountValid} /><br />
 
-                    <input type="submit" id="confirmTransaction" value="Create" onClick={this.createTransaction.bind(this)} />
-                    <button style={{float: 'right'}} onClick={this.hidden.bind(this)}>Cancel</button>
+                    <input type="submit" className='btn btn-default' id="confirmTransaction" value="Create" onClick={this.createTransaction.bind(this)} />
+                    <button className='btn btn-default' style={{ float: 'right' }} onClick={this.hidden.bind(this)}>Cancel</button>
                 </div>
             </dialog>
         );
