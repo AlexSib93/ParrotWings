@@ -49,6 +49,14 @@ namespace ParrotWings.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string Name { get; set; }
+
+        public string LasName { get; set; }
+
+        public string MiddleName { get; set; }
+
+        public DateTime Birthday { get; set; }
     }
 
     public class RegisterExternalBindingModel

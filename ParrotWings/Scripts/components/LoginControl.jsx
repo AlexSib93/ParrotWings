@@ -144,6 +144,8 @@ class RegisterDialog extends React.Component{
                     <input type="text" ref='firstname' /><br /><br />
                     <label>Last name</label><br />
                     <input type="text" ref='lastname' /><br /><br />
+                    <label>Middle name</label><br />
+                    <input type="text" ref='middlename' /><br /><br />
                     <label>Birthday</label><br />
                     <input type="date" ref='birthday' /><br /><br />
                     <input type="submit" value="Register" onClick={this.register.bind(this)} />
@@ -170,6 +172,7 @@ class RegisterDialog extends React.Component{
             ConfirmPassword: this.refs.confirmpass.value,            
             Name: this.refs.firstname.value,
             LasName: this.refs.lastname.value,
+            MiddleName: this.refs.middlename.value,
             Birthday: this.refs.birthday.value
         };
 

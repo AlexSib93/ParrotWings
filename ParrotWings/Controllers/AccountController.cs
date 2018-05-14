@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ParrotWings.Models;
+using System;
 
 namespace ParrotWings.Controllers
 {
@@ -59,7 +60,15 @@ namespace ParrotWings.Controllers
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-            People people = new People(user.Id, user.UserName);
+            People people = new People() {
+                IdentityId = new Guid(user.Id),
+                Name = model.Name,
+                LastName = model.LasName,
+                MiddleName = model.MiddleName,
+                Birthday = model.Birthday,
+                Email = model.Email
+            };
+
             db.Balances.Add(InitBalance(people));
             db.Peoples.Add(people);
             db.SaveChanges();
