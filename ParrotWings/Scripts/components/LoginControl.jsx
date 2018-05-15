@@ -42,6 +42,7 @@
         });
     }
     getStateResult(xhr, status) {
+        console.log('server response',xhr, status)
         if (xhr.status === 401) {
             this.logout();
         }

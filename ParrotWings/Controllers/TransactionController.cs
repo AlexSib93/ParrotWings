@@ -10,6 +10,8 @@ using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Text;
+using System.Net.Http.Headers;
 
 namespace ParrotWings
 {
@@ -82,6 +84,11 @@ namespace ParrotWings
             }
 
             People people = CurrentPeople();
+
+            if (people.Balance < transaction.Amount)
+            {
+                return InternalServerError(new Exception("You don't have enough PW"));
+            }
 
             Transaction newTransaction = new Transaction() {
                 Correspondent = db.Peoples.Find(transaction.RecepientID),

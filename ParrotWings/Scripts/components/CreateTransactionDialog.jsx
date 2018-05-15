@@ -4,7 +4,8 @@
         this.state = {
             show: false,
             correspondentValid: true,
-            amountValid: true
+            amountValid: true,
+            enoughPWValid: true
         }
     }
     render() {
@@ -18,7 +19,8 @@
 
                     <label>Amount of transaction</label><br />
                     <input type="number" ref="amount" id="amount" className='form-control' style={{ borderColor: this.state.amountValid ? '' : 'red' }} required />
-                    <ComponentWithModalDialog text="Amount can not be empty" show={!this.state.amountValid} /><br />
+                    <ComponentWithModalDialog text="Amount can not be empty" show={!this.state.amountValid} />
+                    <ComponentWithModalDialog text="You don't have enough PW" show={!this.state.enoughPWValid} /><br />
 
                     <input type="submit" className='btn btn-default' id="confirmTransaction" value="Create" onClick={this.createTransaction.bind(this)} />
                     <button className='btn btn-default' style={{ float: 'right' }} onClick={this.hidden.bind(this)}>Cancel</button>
@@ -88,21 +90,26 @@
                     xhr.setRequestHeader("Authorization", "Bearer " + token);
                 },
                 success: this.created.bind(this),
-                fail: function (data) {
-                    alert("Creating a transaction fail.")
-                }
+                complete: this.createTransactionResult.bind(this)
             });
+        }
+    }
+    createTransactionResult(xhr, status) {
+        if (xhr.status === 500) {
+            alert(xhr.responseText)
         }
     }
     validate() {
         var cvalid = this.refs.correspondentId.checkValidity()
         var avalid = this.refs.amount.checkValidity()
+        var enaughvalid = this.refs.amount.value <= this.props.Balance
         this.setState({
             correspondentValid: cvalid,
-            amountValid: avalid
+            amountValid: avalid,
+            enoughPWValid: enaughvalid
         })
         console.log(this.refs.correspondentId.checkValidity())
-        return cvalid && avalid;
+        return cvalid && avalid && enaughvalid;
     }
     created(data) {
         alert("Transaction successfully created!");
