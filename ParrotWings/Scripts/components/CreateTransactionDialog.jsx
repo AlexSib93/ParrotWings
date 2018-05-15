@@ -10,7 +10,7 @@
     }
     render() {
         return (
-            <dialog id="regDialog2" style={{ display: this.state.show ? 'block' : 'none', width: '80%' }}>
+            <dialog id="regDialog2" className='container' style={{ display: this.state.show ? 'block' : 'none' }}>
                 <div>
                     <h1> New transaction </h1><br />
                     <label>Choose the recipient</label><br /><input type="text" style={{display: 'none'}} id="txtPeopleID" ref="correspondentId" minLength="1" required />
@@ -48,6 +48,8 @@
         this.setState({
             show: false
         })
+        this.refs.correspondentName.value = '';
+        this.refs.amount.value = '';
     }
     setId(event, ui) {
         this.refs.correspondentId.value = ui.item.id;
