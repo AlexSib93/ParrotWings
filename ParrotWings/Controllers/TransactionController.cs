@@ -84,17 +84,18 @@ namespace ParrotWings
             }
 
             People people = CurrentPeople();
-
+                        
             if (people.Balance < transaction.Amount)
             {
                 return InternalServerError(new Exception("You don't have enough PW"));
             }
-
+            
             Transaction newTransaction = new Transaction() {
                 Correspondent = db.Peoples.Find(transaction.RecepientID),
                 People = people,
                 Amount = transaction.Amount,
-                DateTime = DateTime.Now
+                DateTime = DateTime.Now,
+                Type = TransactionType.Debet
             };
 
             //User balance

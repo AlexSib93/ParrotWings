@@ -16,7 +16,7 @@
                     <br /><br />
 
                     <label>Password</label><br />
-                    <input type="password" placeholder='Type email' className='form-control' ref="loginpassword" style={{ borderColor: this.state.passValid ? '' : 'red' }} required />
+                    <input type="password" placeholder='Type password' className='form-control' ref="loginpassword" style={{ borderColor: this.state.passValid ? '' : 'red' }} required />
                     <br /><br />
                 </form>
                 <input type="submit" value="Login" className='btn btn-default' onClick={this.login.bind(this)} />

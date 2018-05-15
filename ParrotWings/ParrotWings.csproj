@@ -228,7 +228,6 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\app\HelloWorld.jsx" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -275,6 +274,10 @@
     <Compile Include="Migrations\201805140739035_migration.Designer.cs">
       <DependentUpon>201805140739035_migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805150946330_newMigration.cs" />
+    <Compile Include="Migrations\201805150946330_newMigration.Designer.cs">
+      <DependentUpon>201805150946330_newMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Balance.cs" />
@@ -305,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805140739035_migration.resx">
       <DependentUpon>201805140739035_migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805150946330_newMigration.resx">
+      <DependentUpon>201805150946330_newMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -23,5 +23,7 @@ namespace ParrotWings.Models
 
         public DateTime DateTime { get; set; }
 
+        public TransactionType Type { get; set; }
+
     }    
 }

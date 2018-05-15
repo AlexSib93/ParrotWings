@@ -18,8 +18,8 @@
                     <ComponentWithModalDialog text="Name can not be empty" show={!this.state.correspondentValid} /><br />
 
                     <label>Amount of transaction</label><br />
-                    <input type="number" ref="amount" id="amount" className='form-control' style={{ borderColor: this.state.amountValid ? '' : 'red' }} required />
-                    <ComponentWithModalDialog text="Amount can not be empty" show={!this.state.amountValid} />
+                    <input type="number" ref="amount" id="amount" className='form-control' min='0' style={{ borderColor: this.state.amountValid ? '' : 'red' }} required />
+                    <ComponentWithModalDialog text="Amount can not be empty or negative" show={!this.state.amountValid} />
                     <ComponentWithModalDialog text="You don't have enough PW" show={!this.state.enoughPWValid} /><br />
 
                     <input type="submit" className='btn btn-default' id="confirmTransaction" value="Create" onClick={this.createTransaction.bind(this)} />
